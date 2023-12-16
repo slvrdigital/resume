@@ -1,0 +1,39 @@
+.work {
+  @apply grid gap-12;
+}
+
+.work__item {
+  @apply grid gap-4 items-start;
+}
+
+.work__date {
+  color: rgb(var(--color-100));
+}
+
+.work__company-name {
+  @apply mb-1;
+}
+
+.work__company-name a {
+  @apply border-b;
+  border-color: rgba(var(--color-100), 0.25);
+}
+
+.work__company-name a:hover {
+  border-color: rgba(var(--color-100), 0.75);
+}
+
+.work__details {
+  @apply text-sm mb-4;
+  color: rgb(var(--color-100));
+}
+
+@screen sm {
+  .work__item {
+    @apply grid-cols-3;
+  }
+
+  .work__body {
+    @apply col-span-2;
+  }
+}

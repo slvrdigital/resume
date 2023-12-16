@@ -1,0 +1,11 @@
+.section {
+  @apply w-full max-w-2xl mx-auto;
+}
+
+.section:not(:last-child) {
+  @apply mb-16;
+}
+
+.section__title {
+  @apply mb-6;
+}

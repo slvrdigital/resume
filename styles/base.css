@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 248, 249, 250;
+  --color-100: 173, 181, 189;
+  --color-200: 108, 117, 125;
+  --color-300: 73, 80, 87;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 33, 37, 41;
+    --color-100: 108, 117, 125;
+    --color-200: 173, 181, 189;
+    --color-300: 233, 236, 239;
+  }
+}
+
+@layer base {
+  @font-face {
+    font-family: "Blanco-Web";
+    src: url("../public/fonts/Blanco-Regular.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Blanco-Web";
+    font-style: italic;
+    src: url("../public/fonts/Blanco-Italic.woff2") format("woff2");
+  }
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+body {
+  @apply min-h-screen text-base font-sans leading-normal color-200;
+  background-color: rgb(var(--background));
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply color-300;
+}
+
+.site {
+  @apply w-full max-w-2xl pt-16 pb-16 px-6 mx-auto;
+}
+
+.content {
+  @apply font-serif text-lg;
+}
+
+.content p:not(:last-child) {
+  @apply mb-3;
+}
+
+.link {
+  @apply border-b;
+  border-color: rgba(var(--color-100), 0.25);
+}
+
+.link:hover {
+  color: rgb(var(--color-300));
+  border-color: rgba(var(--color-100), 0.75);
+}
+
+.color-300 {
+  color: rgb(var(--color-300));
+}
+
+.color-200 {
+  color: rgb(var(--color-200));
+}
+
+.color-100 {
+  color: rgb(var(--color-100));
+}
+
+.main {
+  @apply mb-24;
+}
