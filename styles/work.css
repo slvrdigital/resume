@@ -15,12 +15,12 @@
 }
 
 .work__company-name a {
-  @apply border-b;
-  border-color: rgba(var(--color-100), 0.25);
+  @apply border-b border-dotted;
+  border-color: rgba(var(--color-100), 0.75);
 }
 
 .work__company-name a:hover {
-  border-color: rgba(var(--color-100), 0.75);
+  border-color: rgba(var(--color-100), 1);
 }
 
 .work__details {
@@ -34,6 +34,10 @@
   }
 
   .work__body {
+    @apply col-span-3;
+  }
+
+  .work__date + .work__body {
     @apply col-span-2;
   }
 }

@@ -12,11 +12,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <style jsx global>{`
-        html {
-          font-family: ${inter.style.fontFamily};
-        }
-      `}</style>
       <Meta {...meta} />
       <Layout>
         <Component {...pageProps} />

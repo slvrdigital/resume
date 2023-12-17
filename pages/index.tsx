@@ -1,43 +1,101 @@
 import { PageConfig } from "next";
+import xp from "@/public/data/xp.json";
+import refs from "@/public/data/refs.json";
+import meta from "@/public/data/meta.json";
+import about from "@/public/data/about.json";
+import projects from "@/public/data/projects.json";
 import Image from "next/image";
 
-// export const config: PageConfig = {
-//   unstable_runtimeJS: false,
-// };
+export const config: PageConfig = {
+  unstable_runtimeJS: false,
+};
 
-export default function Home() {
+export default function Index() {
   return (
     <>
-      <section>
-        <div className="container mx-auto">
-          <h2>About</h2>
-          <p>
-            I’m a designer with 20 years of experience in brand, product design,
-            and creative direction. I have an international reputation for
-            creating warm, smart, and effective design for a variety of
-            companies in technology and publishing. Among these is Abstract
-            (acq. Adobe), which I co-founded in 2014. I’m head of brand at
-            Modern Treasury.
-          </p>
-          <p>
-            I also write and speak about design. Several of my essays and
-            lectures are assigned in design classrooms around the world and act
-            as foundational texts in the web design industry, including
-            Everything Easy is Hard Again, The Web’s Grain, and What Screens
-            Want. In 2012, I wrote, illustrated, and published The Shape of
-            Design.
-          </p>
-        </div>
+      <section className="section">
+        <h2 className="section__title">About</h2>
+        <div
+          className="content"
+          dangerouslySetInnerHTML={{ __html: about.content }}
+        />
       </section>
 
-      <Image
-        className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-        src="/next.svg"
-        alt="Next.js Logo"
-        width={180}
-        height={37}
-        priority
-      />
+      <section className="section">
+        <h2 className="section__title">Contact</h2>
+        <ul className="grid gap-4">
+          {refs.map((item, index) => (
+            <li key={index} className="grid gap-4 items-start grid-cols-3">
+              <p className="color-100">{item.label}</p>
+              <p className="sm:col-span-2">
+                <a className="link" href={item.url} target="_blank">
+                  {item.text}
+                </a>
+              </p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="section">
+        <h2 className="section__title">Work Experience</h2>
+        <ul className="work">
+          {xp.map((post, index) => (
+            <li key={index} className="work__item">
+              <p className="work__date">{post.years.join(" — ")}</p>
+              <div className="work__body">
+                <h3
+                  className="work__company-name"
+                  dangerouslySetInnerHTML={{ __html: post.company_name }}
+                ></h3>
+                <p className="work__details">{post.details}</p>
+                <div className="content">
+                  <p>{post.summary}</p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="section">
+        <h2 className="section__title">Side Projects</h2>
+        <ul className="work">
+          {projects.map((post, index) => (
+            <li key={index} className="work__item">
+              <div className="work__body">
+                <h3
+                  className="work__company-name"
+                  dangerouslySetInnerHTML={{ __html: post.title }}
+                ></h3>
+                <ul className="work__details">
+                  {post.tags.map((tag: string, tagIndex: number) => (
+                    <li key={tagIndex} className="tag">
+                      <span>{tag}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div
+                  className="content"
+                  dangerouslySetInnerHTML={{ __html: post.description }}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
     </>
   );
+}
+
+// This function gets called at build time
+export async function getStaticProps() {
+  return {
+    props: {
+      meta: {
+        title: "Index",
+        description: meta.site_description,
+      },
+    },
+  };
 }

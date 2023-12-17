@@ -1,0 +1,12 @@
+[
+  {
+    "title": "<a href=\"https://github.com/slvrdigital/storyblog\" target=\"_blank\">Express+Storyblok</a> starter",
+    "description": "<p>A customizable boilerplate on <a href=\"https://expressjs.com\" target=\"_blank\">Express.js</a>, tailored for <a href=\"https://www.storyblok.com\" target=\"_blank\">Storyblok</a>, <a href=\"https://amp.dev\" target=\"_blank\">AMP</a>, <a href=\"https://creators.google/en-us/content-creation-products/own-your-content/web-stories\" target=\"_blank\">Web Stories</a>, and <a href=\"https://schema.org\" target=\"_blank\">Schema.org</a>. It's AMP-ready, ensuring optimal mobile performance. This starter simplifies development, making it easy to create high-performing web applications with Storyblok integration and enhanced search engine visibility through Schema.org.</p>",
+    "tags": ["Storyblok", "AMP", "Web Stories", "Schema.org"]
+  },
+  {
+    "title": "<a href=\"https://github.com/slvrdigital/statics-prefetch-module\" target=\"_blank\">JSON prefetch</a> Nuxt module",
+    "description": "<p><a href=\"https://nuxt.com\" target=\"_blank\">Nuxt</a> module designed to optimize performance by reducing network requests and mitigating unexpected API responses through static data prefetching.</p>",
+    "tags": ["Nuxt", "JSON"]
+  }
+]

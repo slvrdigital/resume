@@ -1,20 +1,20 @@
 [
   {
     "years": ["2022", "Now"],
-    "company_name": "Frontend engineer at <a href=\"#\" target=\"_blank\">Enreach</a>",
+    "company_name": "Frontend engineer at <a href=\"https://enreach.com\" target=\"_blank\">Enreach</a>",
     "details": "Almere, The Netherlands & Remote",
-    "summary": "A front-end engineer role at a large-scale international product. Migrating legacy front-end codebase to a modern tech stack, collaboration with UI/UX team and issue resolution."
+    "summary": "Responsible for orchestrating the smooth migration of legacy code to a modern tech stack, cultivating collaboration with UI/UX teams."
   },
   {
     "years": ["2019", "2022"],
-    "company_name": "Frontend developer at <a href=\"#\" target=\"_blank\">Sparing Digital</a>",
+    "company_name": "Frontend developer at <a href=\"https://sparing.digital\" target=\"_blank\">Sparing Digital</a>",
     "details": "Warsaw, Poland & Remote",
-    "summary": "Held a leading role in a front-end team and actively contributed to software design planning, new feature implementation, and resolving issues."
+    "summary": "Played a pivotal role as a leader within a dynamic front-end team, where I actively contributed to the strategic aspects of software design planning, and the implementation of the new features."
   },
   {
     "years": ["2017", "2019"],
-    "company_name": "Fullstack developer at <a href=\"#\" target=\"_blank\">HUEE Digital</a>",
+    "company_name": "Fullstack developer at <a href=\"https://www.behance.net/-huee-\" target=\"_blank\">HUEE Digital</a>",
     "details": "Warsaw, Poland",
-    "summary": "Did full-stack development incl. small-size REST API services and single-page apps. Provided maintenance on mid/large scale projects."
+    "summary": "Contributed to full-stack development, involving the design and implementation of compact REST API services and single-page applications."
   }
 ]

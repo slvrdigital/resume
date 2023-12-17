@@ -38,7 +38,7 @@
 }
 
 body {
-  @apply min-h-screen text-base font-sans leading-normal color-200;
+  @apply min-h-screen py-16 text-base font-sans leading-normal color-200;
   background-color: rgb(var(--background));
 }
 
@@ -51,8 +51,10 @@ h6 {
   @apply color-300;
 }
 
-.site {
-  @apply w-full max-w-2xl pt-16 pb-16 px-6 mx-auto;
+.header,
+.main,
+.footer {
+  @apply w-full max-w-2xl px-6 mx-auto;
 }
 
 .content {
@@ -63,14 +65,16 @@ h6 {
   @apply mb-3;
 }
 
-.link {
-  @apply border-b;
-  border-color: rgba(var(--color-100), 0.25);
+.link,
+.content a {
+  @apply border-b border-dotted;
+  border-color: rgba(var(--color-100), 0.75);
 }
 
-.link:hover {
+.link:hover,
+.content a:hover {
   color: rgb(var(--color-300));
-  border-color: rgba(var(--color-100), 0.75);
+  border-color: rgba(var(--color-100), 1);
 }
 
 .color-300 {
@@ -87,4 +91,14 @@ h6 {
 
 .main {
   @apply mb-24;
+}
+
+.tag {
+  display: inline-block;
+}
+
+.tag + .tag::before {
+  display: inline-block;
+  white-space: pre;
+  content: ", ";
 }
