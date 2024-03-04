@@ -1,0 +1,11 @@
+.list {
+  @apply grid gap-12;
+}
+
+.list--tight {
+  @apply grid gap-4;
+}
+
+.list__item {
+  @apply grid items-start;
+}

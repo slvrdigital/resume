@@ -1,43 +1,39 @@
-.work {
-  @apply grid gap-12;
+/* job */
+.job {
+  @apply gap-4;
 }
 
-.work__item {
-  @apply grid gap-4 items-start;
-}
-
-.work__date {
-  color: rgb(var(--color-100));
-}
-
-.work__company-name {
-  @apply mb-1;
-}
-
-.work__company-name a {
-  @apply border-b border-dotted;
-  border-color: rgba(var(--color-100), 0.75);
-}
-
-.work__company-name a:hover {
-  border-color: rgba(var(--color-100), 1);
-}
-
-.work__details {
-  @apply text-sm mb-4;
+.job__date {
   color: rgb(var(--color-100));
 }
 
 @screen sm {
-  .work__item {
+  .job {
     @apply grid-cols-3;
   }
 
-  .work__body {
-    @apply col-span-3;
-  }
-
-  .work__date + .work__body {
+  .job-body {
     @apply col-span-2;
   }
+}
+
+
+/* project */
+.project {}
+
+.project-tags {
+  @apply mb-4;
+}
+
+/* refs */
+.ref {
+  @apply gap-4 grid-cols-3;
+}
+
+.ref__label {
+  color: rgb(var(--color-100));
+}
+
+.ref-info {
+  @apply col-span-2;
 }

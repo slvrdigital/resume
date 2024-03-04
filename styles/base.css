@@ -89,16 +89,20 @@ h6 {
   color: rgb(var(--color-100));
 }
 
-.main {
-  @apply mb-24;
+.title {
+  @apply mb-1;
 }
 
-.tag {
-  display: inline-block;
+.title a {
+  @apply border-b border-dotted;
+  border-color: rgba(var(--color-100), 0.75);
 }
 
-.tag + .tag::before {
-  display: inline-block;
-  white-space: pre;
-  content: ", ";
+.title a:hover {
+  border-color: rgba(var(--color-100), 1);
+}
+
+.subtitle {
+  @apply text-sm mb-4;
+  color: rgb(var(--color-100));
 }
