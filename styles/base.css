@@ -21,12 +21,14 @@
 @layer base {
   @font-face {
     font-family: "Blanco-Web";
+    font-display: swap;
     src: url("../public/fonts/Blanco-Regular.woff2") format("woff2");
   }
 
   @font-face {
     font-family: "Blanco-Web";
     font-style: italic;
+    font-display: swap;
     src: url("../public/fonts/Blanco-Italic.woff2") format("woff2");
   }
 }
