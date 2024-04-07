@@ -37,8 +37,12 @@
   font-feature-settings: "kern" 1, "liga" 1;
 }
 
+html {
+  @apply font-sans text-base leading-normal color-200;
+  font-size: clamp(1em, 2.5vw, 1.5em);
+}
 body {
-  @apply min-h-screen py-16 text-base font-sans leading-normal color-200;
+  @apply min-h-screen py-16;
   background-color: rgb(var(--background));
 }
 
@@ -58,7 +62,7 @@ h6 {
 }
 
 .content {
-  @apply font-serif text-lg;
+  @apply font-serif text-lg leading-relaxed;
 }
 
 .content p:not(:last-child) {
