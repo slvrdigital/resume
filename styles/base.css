@@ -57,6 +57,11 @@ h6 {
   @apply color-300;
 }
 
+b {
+  font-weight: normal;
+  color: rgb(var(--color-300));
+}
+
 .header,
 .main,
 .footer {
@@ -95,10 +100,6 @@ h6 {
   color: rgb(var(--color-100));
 }
 
-.title {
-  @apply mb-1;
-}
-
 .title a {
   @apply border-b border-dotted;
   border-color: rgba(var(--color-100), 0.75);
@@ -106,9 +107,4 @@ h6 {
 
 .title a:hover {
   border-color: rgba(var(--color-100), 1);
-}
-
-.subtitle {
-  @apply text-sm mb-4;
-  color: rgb(var(--color-100));
 }

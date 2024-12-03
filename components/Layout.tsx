@@ -1,3 +1,5 @@
+import Providers from "@/providers/Providers";
+import Link from "next/link";
 import meta from "@/public/data/meta.json";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -5,12 +7,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <header className="header">
         <h1 className="grid">
-          <span className="color-300">{meta.site_name}</span>
+          <Link href="/" className="color-300">
+            {meta.site_name}
+          </Link>
           <span className="color-100">{meta.position}</span>
           <span className="color-100">{meta.location}</span>
         </h1>
       </header>
-      <main className="main">{children}</main>
+      <main className="main">
+        <Providers>{children}</Providers>
+      </main>
       <footer className="footer">
         <p className="color-100 text-right">
           Copyright © {new Date().getFullYear()} &mdash; {meta.site_name}
