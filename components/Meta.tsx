@@ -25,7 +25,9 @@ const Meta: React.FC<Props> = ({
   const ogType = router.pathname === "/" ? "website" : "article";
 
   function getImage() {
-    return image ?? path.join(SITE_URL, "avatar.jpeg");
+    return (
+      image ?? path.join(SITE_URL, process.env.BASE_PATH ?? "", "avatar.jpeg")
+    );
   }
 
   function getTitle(): string {

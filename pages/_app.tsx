@@ -1,6 +1,5 @@
 import Layout from "@/components/Layout";
 import Meta from "@/components/Meta";
-import Head from "next/head";
 import type { AppProps } from "next/app";
 import "@/styles/globals.css";
 
@@ -11,9 +10,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head>
-        <base href={config.basePath + "/"} />
-      </Head>
       <Meta {...meta} />
       <Layout>
         <Component {...pageProps} />

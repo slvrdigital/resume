@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Image
             width={64}
             height={64}
-            src="/avatar.jpeg"
+            src={`${process.env.BASE_PATH ?? ""}/avatar.jpeg`}
             alt={meta.site_name}
             className="rounded-full active:scale-95"
             loading="lazy"
