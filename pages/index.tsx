@@ -13,6 +13,7 @@ import PostCard, { type Post } from "@/storyblok/PostCard";
 import ProjectCard, { type Project } from "@/storyblok/ProjectCard";
 import RichText from "@/storyblok/RichText";
 import { commonStoryblokParams } from "@/config/storyblokParams";
+import { fetchExtendedActivities } from "@/service/stravaApi";
 
 export const config: PageConfig = {
   unstable_runtimeJS: false,
@@ -78,7 +79,7 @@ export default function Index({ page, activities }: PageProps) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const { page, activities } = await fetchData();
 
   return {
@@ -105,8 +106,7 @@ export async function fetchData() {
     { cache: "no-store" }
   );
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/strava`);
-  const activities = await response.json();
+  const { data: activities } = await fetchExtendedActivities();
 
   return {
     page,
