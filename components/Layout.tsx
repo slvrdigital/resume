@@ -11,7 +11,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {meta.site_name}
           </Link>
           <span className="color-100">{meta.position}</span>
-          <span className="color-100">{meta.location}</span>
         </h1>
       </header>
       <main className="main">
