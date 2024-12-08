@@ -1,24 +1,12 @@
-import {
-  storyblokEditable,
-  RichTextResolver,
-  type ISbRichtext,
-} from "@storyblok/react";
-import Title from "@/components/Title";
+import { storyblokEditable } from "@storyblok/react";
+import Section from "@/components/Section";
+import RichText from "@/storyblok/RichText";
 
 const PostContent = ({ blok }: { blok: Record<string, any> }) => {
-  const richText = (data: ISbRichtext) => new RichTextResolver().render(data);
-
   return (
-    <section className="post section" {...storyblokEditable(blok)}>
-      {blok.title && <Title size="lg">{blok.title}</Title>}
-
-      <div
-        className="content"
-        dangerouslySetInnerHTML={{
-          __html: richText(blok.content),
-        }}
-      />
-    </section>
+    <Section title={blok.title} {...storyblokEditable(blok)}>
+      <RichText content={blok.content} />
+    </Section>
   );
 };
 

@@ -1,129 +1,85 @@
 import { PageConfig } from "next";
-import xp from "@/public/data/xp.json";
-import refs from "@/public/data/refs.json";
 import meta from "@/public/data/meta.json";
-import about from "@/public/data/about.json";
 import projects from "@/public/data/projects.json";
-import Title from "@/components/Title";
 import Section from "@/components/Section";
-import {
-  getStoryblokApi,
-  ISbRichtext,
-  ISbStoriesParams,
-  RichTextResolver,
-} from "@storyblok/react";
-import Link from "next/link";
-
-const RECENT_LOG_ENTRIES = 3;
+import List from "@/components/List";
+import ListItem from "@/components/ListItem";
+import Strava from "@/components/strava/Strava";
+import { getStoryblokApi } from "@storyblok/react";
+import type { Activity } from "@/types";
+import JobCard, { type Job } from "@/storyblok/JobCard";
+import RefCard, { type Ref } from "@/storyblok/RefCard";
+import PostCard, { type Post } from "@/storyblok/PostCard";
+import ProjectCard, { type Project } from "@/storyblok/ProjectCard";
+import RichText from "@/storyblok/RichText";
+import { useStoryblok } from "@/hooks/useStoryblok";
 
 export const config: PageConfig = {
   unstable_runtimeJS: false,
 };
 
-export default function Index({ posts }: { posts: Record<string, any>[] }) {
-  const richText = (data: ISbRichtext) => new RichTextResolver().render(data);
+interface PageProps {
+  page: Record<string, any>;
+  posts: Record<string, any>[];
+  activities: Activity[];
+}
 
+export default function Index({ page, activities }: PageProps) {
   return (
     <>
       <Section title="About">
-        <div
-          className="content"
-          dangerouslySetInnerHTML={{ __html: about.content }}
-        />
+        <RichText content={page.story.content.about} />
       </Section>
 
       <Section title="Contact">
-        <ul className="list list--tight">
-          {refs.map((item, index) => (
-            <li key={index} className="list__item ref">
-              <p className="ref__label">{item.label}</p>
-              <p className="ref-info">
-                <a className="link" href={item.url} target="_blank">
-                  {item.text}
-                </a>
-              </p>
-            </li>
+        <List variant="compact">
+          {page.story.content.links.map((ref: Ref, index: number) => (
+            <ListItem key={index}>
+              <RefCard value={ref} />
+            </ListItem>
           ))}
-        </ul>
+        </List>
       </Section>
 
       <Section title="Work Experience">
-        <ul className="list">
-          {xp.map((post, index) => (
-            <li key={index} className="list__item job">
-              <p className="job__date">{post.years.join(" — ")}</p>
-              <div className="job-body">
-                <Title
-                  tag="h3"
-                  dangerouslySetInnerHTML={{ __html: post.company_name }}
-                />
-                <p className="text-sm mb-4 color-100">{post.details}</p>
-                <div className="content">
-                  <p>{post.summary}</p>
-                </div>
-              </div>
-            </li>
+        <List>
+          {page.story.content.jobs.map((job: Job, index: number) => (
+            <ListItem key={index}>
+              <JobCard value={job} />
+            </ListItem>
           ))}
-        </ul>
+        </List>
       </Section>
 
-      <Section
-        title="Log"
-        action={
-          posts.length > RECENT_LOG_ENTRIES && (
-            <Link href="/log" className="link mb-6">
-              See All
-            </Link>
-          )
-        }
-      >
-        <ul className="list">
-          {posts.map((post, index) => (
-            <li key={index} className="list__item post">
-              <Title tag="h3">
-                <Link href={`/log/${post.slug}`}>{post.name}</Link>
-              </Title>
-              <div
-                className="content"
-                dangerouslySetInnerHTML={{
-                  __html: richText(post.content.description),
-                }}
-              />
-            </li>
+      <Section title="Log" href="/log">
+        <List>
+          {page.story.content.posts.map((post: Post, index: number) => (
+            <ListItem key={index}>
+              <PostCard value={post} />
+            </ListItem>
           ))}
-        </ul>
+        </List>
       </Section>
 
       <Section title="Side Projects">
-        <ul className="list">
-          {projects.map((post, index) => (
-            <li key={index} className="list__item project">
-              <Title
-                tag="h3"
-                dangerouslySetInnerHTML={{ __html: post.title }}
-              />
-              <ul className="tags">
-                {post.tags.map((tag: string, tagIndex: number) => (
-                  <li key={tagIndex} className="tag">
-                    <span>{tag}</span>
-                  </li>
-                ))}
-              </ul>
-              <div
-                className="content"
-                dangerouslySetInnerHTML={{ __html: post.description }}
-              />
-            </li>
+        <List>
+          {projects.map((project: Project, index: number) => (
+            <ListItem key={index}>
+              <ProjectCard value={project} />
+            </ListItem>
           ))}
-        </ul>
+        </List>
+      </Section>
+
+      <Section title="Recent Activities" href={meta.strava_profile}>
+        <Strava activities={activities} />
       </Section>
     </>
   );
 }
 
-// This function gets called at build time
-export async function getStaticProps() {
-  const { data: _posts } = await fetchData();
+export async function getServerSideProps() {
+  const { page, activities } = await fetchData();
 
   return {
     props: {
@@ -131,18 +87,29 @@ export async function getStaticProps() {
         title: "Index",
         description: meta.site_description,
       },
-      posts: _posts?.stories ?? [],
+      activities,
+      page,
     },
   };
 }
 
 export async function fetchData() {
-  const sbParams: ISbStoriesParams = {
-    version: "published",
-    starts_with: "posts",
-    per_page: RECENT_LOG_ENTRIES,
-  };
+  const sbParams = useStoryblok({
+    resolve_relations: ["index.jobs", "index.posts"],
+  }).params;
 
   const storyblokApi = getStoryblokApi();
-  return await storyblokApi.get(`cdn/stories`, sbParams, { cache: "no-store" });
+  const { data: page = {} } = await storyblokApi.get(
+    `cdn/stories/index`,
+    sbParams,
+    { cache: "no-store" }
+  );
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/strava`);
+  const activities = await response.json();
+
+  return {
+    page,
+    activities,
+  };
 }
