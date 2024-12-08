@@ -40,9 +40,10 @@
 }
 
 html {
-  @apply font-sans text-base leading-normal color-200;
+  @apply font-sans font-normal text-base leading-normal color-200;
   font-size: clamp(1em, 2.5vw, 1.5em);
 }
+
 body {
   @apply min-h-screen py-16;
   background-color: rgb(var(--background));
@@ -57,7 +58,8 @@ h6 {
   @apply color-300;
 }
 
-b {
+b,
+strong {
   font-weight: normal;
   color: rgb(var(--color-300));
 }
@@ -68,16 +70,25 @@ b {
   @apply w-full max-w-2xl px-6 mx-auto;
 }
 
-.content {
-  @apply font-serif text-lg leading-relaxed;
-}
-
-.content.content--base {
-  @apply text-base;
-}
-
 .content p:not(:last-child) {
-  @apply mb-3;
+  @apply mb-2;
+}
+
+.content ul,
+.content ol {
+  @apply pl-6 mb-2;
+}
+
+.content ul {
+  list-style-type: disc;
+}
+
+.content ol {
+  list-style-type: decimal;
+}
+
+.content code {
+  @apply text-sm;
 }
 
 .link,
@@ -102,13 +113,4 @@ b {
 
 .color-100 {
   color: rgb(var(--color-100));
-}
-
-.title a {
-  @apply border-b border-dotted;
-  border-color: rgba(var(--color-100), 0.75);
-}
-
-.title a:hover {
-  border-color: rgba(var(--color-100), 1);
 }
