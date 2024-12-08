@@ -1,9 +1,13 @@
-import type { ISbStoriesParams, ISbRichtext } from "@storyblok/react";
-import { getStoryblokApi, RichTextResolver } from "@storyblok/react";
+import { getStoryblokApi } from "@storyblok/react";
 import { PageConfig } from "next";
 import Link from "next/link";
 import meta from "@/public/data/meta.json";
+import Section from "@/components/Section";
 import Title from "@/components/Title";
+import List from "@/components/List";
+import ListItem from "@/components/ListItem";
+import RichText from "@/storyblok/RichText";
+import { useStoryblok } from "@/hooks/useStoryblok";
 
 export const config: PageConfig = {
   unstable_runtimeJS: false,
@@ -14,29 +18,20 @@ export default function PostsIndex({
 }: {
   posts: Record<string, any>[];
 }) {
-  const richText = (data: ISbRichtext) => new RichTextResolver().render(data);
-
   return (
     <>
-      <section className="section">
-        <h2 className="section__title">Log</h2>
-
-        <ul className="list">
+      <Section title="Log">
+        <List>
           {posts.map((post, index) => (
-            <li key={index} className="list__item post">
+            <ListItem key={index}>
               <Title tag="h3">
                 <Link href={`/log/${post.slug}`}>{post.name}</Link>
               </Title>
-              <div
-                className="content"
-                dangerouslySetInnerHTML={{
-                  __html: richText(post.content.description),
-                }}
-              />
-            </li>
+              <RichText content={post.content.description} />
+            </ListItem>
           ))}
-        </ul>
-      </section>
+        </List>
+      </Section>
     </>
   );
 }
@@ -57,11 +52,10 @@ export async function getStaticProps() {
 }
 
 export async function fetchData() {
-  const sbParams: ISbStoriesParams = {
-    version: "published",
+  const sbParams = useStoryblok({
     starts_with: "posts",
     per_page: 10,
-  };
+  }).params;
 
   const storyblokApi = getStoryblokApi();
   return await storyblokApi.get(`cdn/stories`, sbParams, { cache: "no-store" });

@@ -1,7 +1,7 @@
-import type { ISbStoriesParams } from "@storyblok/react";
 import { getStoryblokApi, StoryblokComponent } from "@storyblok/react";
 import { GetStaticPaths, PageConfig } from "next";
 import meta from "@/public/data/meta.json";
+import { useStoryblok } from "@/hooks/useStoryblok";
 
 export const config: PageConfig = {
   unstable_runtimeJS: false,
@@ -38,8 +38,6 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   const paths =
     data.stories.map((story: { slug: string }) => `/log/${story.slug}`) || [];
 
-  console.log("__paths__", paths);
-
   return {
     paths,
     fallback: true,
@@ -47,10 +45,9 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
 };
 
 export async function fetchData(slug: string) {
-  const sbParams: ISbStoriesParams = {
-    version: "published",
+  const sbParams = useStoryblok({
     resolve_relations: ["post.tags"],
-  };
+  }).params;
 
   const storyblokApi = getStoryblokApi();
   return await storyblokApi.get(`cdn/stories/posts/${slug}`, sbParams, {
@@ -59,11 +56,10 @@ export async function fetchData(slug: string) {
 }
 
 export async function fetchAllPosts() {
-  const sbParams: ISbStoriesParams = {
-    version: "published",
+  const sbParams = useStoryblok({
     starts_with: "posts",
     per_page: 100,
-  };
+  }).params;
 
   const storyblokApi = getStoryblokApi();
   return await storyblokApi.get(`cdn/stories`, sbParams, { cache: "no-store" });
