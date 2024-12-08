@@ -1,8 +1,9 @@
 import { formatDistanceToNow, parseISO, format } from "date-fns";
 import Title from "@/components/Title";
+import Content from "@/components/Content";
 import Time from "./Time";
 import Heartrate from "./Heartrate";
-import { Activity } from "@/types";
+import { Activity as ActivityType } from "@/types";
 
 function formatDate(dateString: string): string {
   const date = parseISO(dateString);
@@ -21,7 +22,7 @@ function formatDate(dateString: string): string {
   return format(date, "MMM d, yyyy");
 }
 
-export default function ActivityCard({ value }: { value: Activity }) {
+export default function Activity({ value }: { value: ActivityType }) {
   const activityUrl = `https://www.strava.com/activities/${value.id}`;
 
   return (
@@ -30,19 +31,14 @@ export default function ActivityCard({ value }: { value: Activity }) {
 
       <div className="sm:col-span-2">
         <Title tag="h3">
-          <a href={activityUrl} target="_blank">
+          <a href={activityUrl} className="link" target="_blank">
             {value.name}
           </a>
         </Title>
         <div className="text-sm mb-4 color-100">
           <span>{value.sport_type}</span>
         </div>
-        {value.description && (
-          <div
-            className="content mb-2"
-            dangerouslySetInnerHTML={{ __html: value.description }}
-          />
-        )}
+        {value.description && <Content html={value.description} />}
         <div className="flex flex-wrap gap-x-1.5 gap-y-0.5">
           {value.moving_time && <Time value={value.moving_time}></Time>}
           {value.has_heartrate && <Heartrate value={value.average_heartrate} />}
