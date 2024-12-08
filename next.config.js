@@ -14,8 +14,11 @@ const cspHeader = `
   frame-src 'self' https://emgithub.com;
 `;
 
+const isProd = process.env.NODE_ENV === "production";
+
 const nextConfig = {
-  basePath: process.env.NODE_ENV === "production" ? "/resume" : "",
+  basePath: isProd ? "/resume" : "",
+  assetPrefix: isProd ? "/resume/" : "",
   async headers() {
     return [
       {
