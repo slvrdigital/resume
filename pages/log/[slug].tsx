@@ -1,7 +1,7 @@
 import { getStoryblokApi, StoryblokComponent } from "@storyblok/react";
 import { GetStaticPaths, PageConfig } from "next";
 import meta from "@/public/data/meta.json";
-import { useStoryblok } from "@/hooks/useStoryblok";
+import { commonStoryblokParams } from "@/config/storyblokParams";
 
 export const config: PageConfig = {
   unstable_runtimeJS: false,
@@ -45,9 +45,9 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
 };
 
 export async function fetchData(slug: string) {
-  const sbParams = useStoryblok({
+  const sbParams = commonStoryblokParams({
     resolve_relations: ["post.tags"],
-  }).params;
+  });
 
   const storyblokApi = getStoryblokApi();
   return await storyblokApi.get(`cdn/stories/posts/${slug}`, sbParams, {
@@ -56,10 +56,10 @@ export async function fetchData(slug: string) {
 }
 
 export async function fetchAllPosts() {
-  const sbParams = useStoryblok({
+  const sbParams = commonStoryblokParams({
     starts_with: "posts",
     per_page: 100,
-  }).params;
+  });
 
   const storyblokApi = getStoryblokApi();
   return await storyblokApi.get(`cdn/stories`, sbParams, { cache: "no-store" });

@@ -7,7 +7,7 @@ import Title from "@/components/Title";
 import List from "@/components/List";
 import ListItem from "@/components/ListItem";
 import RichText from "@/storyblok/RichText";
-import { useStoryblok } from "@/hooks/useStoryblok";
+import { commonStoryblokParams } from "@/config/storyblokParams";
 
 export const config: PageConfig = {
   unstable_runtimeJS: false,
@@ -52,10 +52,10 @@ export async function getStaticProps() {
 }
 
 export async function fetchData() {
-  const sbParams = useStoryblok({
+  const sbParams = commonStoryblokParams({
     starts_with: "posts",
     per_page: 10,
-  }).params;
+  });
 
   const storyblokApi = getStoryblokApi();
   return await storyblokApi.get(`cdn/stories`, sbParams, { cache: "no-store" });

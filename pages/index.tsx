@@ -12,7 +12,7 @@ import RefCard, { type Ref } from "@/storyblok/RefCard";
 import PostCard, { type Post } from "@/storyblok/PostCard";
 import ProjectCard, { type Project } from "@/storyblok/ProjectCard";
 import RichText from "@/storyblok/RichText";
-import { useStoryblok } from "@/hooks/useStoryblok";
+import { commonStoryblokParams } from "@/config/storyblokParams";
 
 export const config: PageConfig = {
   unstable_runtimeJS: false,
@@ -94,9 +94,9 @@ export async function getServerSideProps() {
 }
 
 export async function fetchData() {
-  const sbParams = useStoryblok({
+  const sbParams = commonStoryblokParams({
     resolve_relations: ["index.jobs", "index.posts"],
-  }).params;
+  });
 
   const storyblokApi = getStoryblokApi();
   const { data: page = {} } = await storyblokApi.get(
