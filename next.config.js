@@ -18,7 +18,6 @@ const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig = {
   basePath: isProd ? "/resume" : "",
-  assetPrefix: isProd ? "/resume/" : "",
   async headers() {
     return [
       {
