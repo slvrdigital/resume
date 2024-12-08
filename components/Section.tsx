@@ -38,10 +38,10 @@ export default function Section({
                     width="24"
                     height="24"
                     stroke="currentColor"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     className="w-4 h-4"
                   >
                     <polyline points="9 18 15 12 9 6"></polyline>

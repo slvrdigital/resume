@@ -25,7 +25,9 @@ export default function PostsIndex({
           {posts.map((post, index) => (
             <ListItem key={index}>
               <Title tag="h3">
-                <Link href={`/log/${post.slug}`}>{post.name}</Link>
+                <Link href={`/log/${post.slug}`} className="link">
+                  {post.name}
+                </Link>
               </Title>
               <RichText content={post.content.description} />
             </ListItem>
