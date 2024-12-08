@@ -1,7 +1,11 @@
-export default function List({ children }: { children: React.ReactNode }) {
-  return (
-    <ul className="list">
-      {children}
-    </ul>
-  );
+export interface ListProps {
+  children: React.ReactNode;
+  variant?: "default" | "compact";
+}
+
+export default function List({ children, variant = "default" }: ListProps) {
+  const _variant = variant === "default" ? "gap-12" : "gap-4";
+  const className = `grid ${_variant}`;
+
+  return <ul className={className}>{children}</ul>;
 }
