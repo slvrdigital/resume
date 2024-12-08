@@ -2,6 +2,7 @@ import {
   richTextResolver,
   type StoryblokRichTextNode,
 } from "@storyblok/richtext";
+import Content from "@/components/Content";
 
 interface Props {
   className?: string;
@@ -10,21 +11,18 @@ interface Props {
 
 const IFRAME_TAG = "<iframe";
 
-const RichTextWithIframe = ({ content, className = "content" }: Props) => {
+const RichTextWithIframe = ({ content, className }: Props) => {
   const html = richTextResolver({
     resolvers: {
-      text: (node) => (node.text?.includes(IFRAME_TAG) ? node.text : node.text),
+      text: (node) => {
+        if (node.text?.includes(IFRAME_TAG)) return node.text;
+
+        return richTextResolver().render(node);
+      },
     },
   }).render(content);
 
-  return (
-    <div
-      className={className}
-      dangerouslySetInnerHTML={{
-        __html: html as string,
-      }}
-    />
-  );
+  return <Content className={className} html={html as string} />;
 };
 
 export default RichTextWithIframe;
