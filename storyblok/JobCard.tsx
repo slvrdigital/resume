@@ -31,7 +31,11 @@ export default function JobCard({ value }: { value: Job }) {
       <div className="sm:col-span-2">
         <Title tag="h3">
           {value.content.position} at{" "}
-          <a href={value.content.company_url.url} target="_blank">
+          <a
+            href={value.content.company_url.url}
+            className="link"
+            target="_blank"
+          >
             {value.content.company_name}
           </a>
         </Title>

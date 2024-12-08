@@ -15,7 +15,9 @@ export default function PostCard({ value }: { value: Post }) {
   return (
     <div className="post">
       <Title tag="h3">
-        <Link href={`/log/${value.slug}`}>{value.name}</Link>
+        <Link className="link" href={`/log/${value.slug}`}>
+          {value.name}
+        </Link>
       </Title>
       <RichText content={value.content.description} />
     </div>

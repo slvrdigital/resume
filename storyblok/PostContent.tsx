@@ -4,8 +4,11 @@ import RichText from "@/storyblok/RichText";
 
 const PostContent = ({ blok }: { blok: Record<string, any> }) => {
   return (
-    <Section title={blok.title} {...storyblokEditable(blok)}>
-      <RichText content={blok.content} />
+    <Section title={blok.title} spacing="compact" {...storyblokEditable(blok)}>
+      <RichText
+        className="content text-base font-sans leading-relaxed"
+        content={blok.content}
+      />
     </Section>
   );
 };
