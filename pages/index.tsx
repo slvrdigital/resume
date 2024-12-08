@@ -106,7 +106,7 @@ export async function fetchData() {
     { cache: "no-store" }
   );
 
-  const { data: activities } = await fetchExtendedActivities();
+  const { data: activities = [] } = await fetchExtendedActivities();
 
   return {
     page,
