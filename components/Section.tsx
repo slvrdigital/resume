@@ -4,24 +4,33 @@ import Title from "./Title";
 export interface Props {
   title: string;
   href?: string;
+  spacing?: "default" | "compact";
+  headerSlot?: React.ReactNode;
   children?: React.ReactNode;
   [key: string]: unknown;
 }
 
 export default function Section({
   title,
-  action,
+  headerSlot,
   href,
+  spacing = "default",
   children,
   ...props
 }: Props) {
+  const _spacing = spacing === "default" ? "mb-20" : "mb-10";
+  const className = `w-full ${_spacing}`;
+
   return (
-    <section className="w-full mb-16" {...props}>
+    <section className={className} {...props}>
       {title && (
-        <header className="w-full mb-5 flex items-center gap-8 justify-between">
-          <Title className="group mb-1">
+        <header className="w-full mb-3">
+          <Title>
             {href ? (
-              <Link href={href} className="flex items-center gap-1">
+              <Link
+                href={href}
+                className="group inline-flex items-center gap-1"
+              >
                 <span className="link">{title}</span>
                 <span className="mt-0.5 -translate-x-2 opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100">
                   <svg
@@ -43,6 +52,8 @@ export default function Section({
               title
             )}
           </Title>
+
+          {headerSlot}
         </header>
       )}
 

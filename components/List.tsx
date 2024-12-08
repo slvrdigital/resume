@@ -4,7 +4,7 @@ export interface ListProps {
 }
 
 export default function List({ children, variant = "default" }: ListProps) {
-  const _variant = variant === "default" ? "gap-12" : "gap-4";
+  const _variant = variant === "default" ? "gap-8" : "gap-4";
   const className = `grid ${_variant}`;
 
   return <ul className={className}>{children}</ul>;

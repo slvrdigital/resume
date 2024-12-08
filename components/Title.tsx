@@ -13,7 +13,7 @@ export default function Title({ size, tag, children, ...props }: Props) {
   const className = useSize(size);
 
   return (
-    <TagName className={`${className} mb-1 title`} {...props}>
+    <TagName className={`${className} mb-1`} {...props}>
       {children}
     </TagName>
   );

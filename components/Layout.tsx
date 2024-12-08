@@ -1,12 +1,24 @@
 import Providers from "@/providers/Providers";
+import Image from "next/image";
 import Link from "next/link";
 import meta from "@/public/data/meta.json";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <header className="header">
-        <h1 className="grid">
+      <header className="header flex items-center gap-4">
+        <Link href="/">
+          <Image
+            width={64}
+            height={64}
+            src="/avatar.jpeg"
+            alt={meta.site_name}
+            className="rounded-full active:scale-95"
+            loading="lazy"
+          />
+        </Link>
+
+        <h1 className="inline-grid">
           <Link href="/" className="color-300">
             {meta.site_name}
           </Link>
