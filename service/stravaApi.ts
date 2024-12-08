@@ -78,7 +78,7 @@ export async function fetchExtendedActivities() {
     const { data } = await fetchActivities();
     const list = await Promise.all(data.map((i) => fetchActivity(i.id)));
 
-    return { data: list.map((i) => i.data) };
+    return { data: list.map((i) => i.data).flat() };
   } catch (error) {
     console.error(error);
     throw new Error("Failed to fetch activities");
