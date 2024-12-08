@@ -11,6 +11,7 @@ const cspHeader = `
   form-action 'self';
   frame-ancestors 'none';
   upgrade-insecure-requests;
+  frame-src 'self' https://emgithub.com;
 `;
 
 const nextConfig = {
