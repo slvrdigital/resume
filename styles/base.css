@@ -88,7 +88,16 @@ strong {
 }
 
 .content code {
-  @apply text-sm;
+  @apply text-xs px-1 py-0.5 rounded font-bold;
+  background-color: rgba(var(--color-100), 0.1);
+  color: rgb(var(--color-300));
+}
+
+@media (prefers-color-scheme: dark) {
+  .content code {
+    background-color: rgba(var(--color-300), 0.1);
+    color: rgb(var(--color-300));
+  }
 }
 
 .link,
