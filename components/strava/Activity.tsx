@@ -3,7 +3,7 @@ import Title from "@/components/Title";
 import Content from "@/components/Content";
 import Time from "./Time";
 import Heartrate from "./Heartrate";
-import { Activity as ActivityType } from "@/types";
+import { Activity as ActivityType } from "@/typings/strava";
 
 function formatDate(dateString: string): string {
   const date = parseISO(dateString);

@@ -3,10 +3,11 @@ import {
   type StoryblokRichTextNode,
 } from "@storyblok/richtext";
 import Content from "@/components/Content";
+import type { ResumeRichtextSb } from "@/typings/storyblok";
 
 interface Props {
   className?: string;
-  content: StoryblokRichTextNode;
+  content?: ResumeRichtextSb;
 }
 
 const IFRAME_TAG = "<iframe";
@@ -20,7 +21,7 @@ const RichTextWithIframe = ({ content, className }: Props) => {
         return richTextResolver().render(node);
       },
     },
-  }).render(content);
+  }).render(content as StoryblokRichTextNode);
 
   return <Content className={className} html={html as string} />;
 };
