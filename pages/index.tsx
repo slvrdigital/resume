@@ -5,23 +5,21 @@ import Section from "@/components/Section";
 import List from "@/components/List";
 import ListItem from "@/components/ListItem";
 import Strava from "@/components/strava/Strava";
-import { getStoryblokApi } from "@storyblok/react";
-import type { Activity } from "@/types";
-import JobCard, { type Job } from "@/storyblok/JobCard";
-import RefCard, { type Ref } from "@/storyblok/RefCard";
-import PostCard, { type Post } from "@/storyblok/PostCard";
+import type { Activity } from "@/typings/strava";
+import JobCard from "@/storyblok/JobCard";
+import RefCard from "@/storyblok/RefCard";
+import PostCard from "@/storyblok/PostCard";
 import ProjectCard, { type Project } from "@/storyblok/ProjectCard";
 import RichText from "@/storyblok/RichText";
-import { commonStoryblokParams } from "@/config/storyblokParams";
 import { fetchExtendedActivities } from "@/service/stravaApi";
+import { fetchIndexPage } from "@/service/storyblokApi";
 
 export const config: PageConfig = {
   unstable_runtimeJS: false,
 };
 
 interface PageProps {
-  page: Record<string, any>;
-  posts: Record<string, any>[];
+  page: Awaited<ReturnType<typeof fetchIndexPage>>;
   activities: Activity[];
 }
 
@@ -29,12 +27,12 @@ export default function Index({ page, activities }: PageProps) {
   return (
     <>
       <Section title="About">
-        <RichText content={page.story.content.about} />
+        <RichText content={page.about} />
       </Section>
 
       <Section title="Contact">
         <List variant="compact">
-          {page.story.content.links.map((ref: Ref, index: number) => (
+          {page.links?.map((ref, index: number) => (
             <ListItem key={index}>
               <RefCard value={ref} />
             </ListItem>
@@ -44,7 +42,7 @@ export default function Index({ page, activities }: PageProps) {
 
       <Section title="Work Experience">
         <List>
-          {page.story.content.jobs.map((job: Job, index: number) => (
+          {page.jobs?.map((job, index: number) => (
             <ListItem key={index}>
               <JobCard value={job} />
             </ListItem>
@@ -54,7 +52,7 @@ export default function Index({ page, activities }: PageProps) {
 
       <Section title="Log" href="/log">
         <List>
-          {page.story.content.posts.map((post: Post, index: number) => (
+          {page.posts?.map((post, index: number) => (
             <ListItem key={index}>
               <PostCard value={post} />
             </ListItem>
@@ -80,7 +78,8 @@ export default function Index({ page, activities }: PageProps) {
 }
 
 export async function getStaticProps() {
-  const { page, activities } = await fetchData();
+  const stravaActivities = await fetchExtendedActivities();
+  const indexPage = await fetchIndexPage();
 
   return {
     props: {
@@ -88,28 +87,8 @@ export async function getStaticProps() {
         title: "Index",
         description: meta.site_description,
       },
-      activities,
-      page,
+      activities: stravaActivities,
+      page: indexPage,
     },
-  };
-}
-
-export async function fetchData() {
-  const sbParams = commonStoryblokParams({
-    resolve_relations: ["index.jobs", "index.posts"],
-  });
-
-  const storyblokApi = getStoryblokApi();
-  const { data: page = {} } = await storyblokApi.get(
-    `cdn/stories/index`,
-    sbParams,
-    { cache: "no-store" }
-  );
-
-  const { data: activities = [] } = await fetchExtendedActivities();
-
-  return {
-    page,
-    activities,
   };
 }

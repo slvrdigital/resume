@@ -9,5 +9,5 @@ export default async function handler(
 ) {
   const response = await fetchExtendedActivities();
 
-  res.status(200).json(response.data);
+  res.status(200).json(response);
 }

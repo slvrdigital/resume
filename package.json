@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "storyblok:types": "bash .script/storyblok.sh"
   },
   "dependencies": {
     "@storyblok/react": "^4.0.0",
@@ -25,5 +26,8 @@
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.3",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "storyblok": "^3.35.1"
   }
 }

@@ -1,4 +1,3 @@
-import { getStoryblokApi } from "@storyblok/react";
 import { PageConfig } from "next";
 import Link from "next/link";
 import meta from "@/public/data/meta.json";
@@ -7,7 +6,7 @@ import Title from "@/components/Title";
 import List from "@/components/List";
 import ListItem from "@/components/ListItem";
 import RichText from "@/storyblok/RichText";
-import { commonStoryblokParams } from "@/config/storyblokParams";
+import { fetchPosts } from "@/service/storyblokApi";
 
 export const config: PageConfig = {
   unstable_runtimeJS: false,
@@ -16,7 +15,7 @@ export const config: PageConfig = {
 export default function PostsIndex({
   posts,
 }: {
-  posts: Record<string, any>[];
+  posts: Awaited<ReturnType<typeof fetchPosts>>;
 }) {
   return (
     <>
@@ -38,9 +37,8 @@ export default function PostsIndex({
   );
 }
 
-// This function gets called at build time
 export async function getStaticProps() {
-  const { data } = await fetchData();
+  const posts = await fetchPosts({ per_page: 10 });
 
   return {
     props: {
@@ -48,17 +46,7 @@ export async function getStaticProps() {
         title: "Posts",
         description: meta.site_description,
       },
-      posts: data?.stories ?? [],
+      posts,
     },
   };
-}
-
-export async function fetchData() {
-  const sbParams = commonStoryblokParams({
-    starts_with: "posts",
-    per_page: 10,
-  });
-
-  const storyblokApi = getStoryblokApi();
-  return await storyblokApi.get(`cdn/stories`, sbParams, { cache: "no-store" });
 }

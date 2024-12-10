@@ -1,4 +1,4 @@
-import type { Activity as ActivityType } from "@/types";
+import type { Activity as ActivityType } from "@/typings/strava";
 import Activity from "./Activity";
 import List from "../List";
 import ListItem from "../ListItem";

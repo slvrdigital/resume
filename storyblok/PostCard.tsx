@@ -1,17 +1,16 @@
 import Link from "next/link";
 import Title from "@/components/Title";
 import RichText from "@/storyblok/RichText";
-import type { StoryblokRichTextNode } from "@storyblok/richtext";
+import type { ResumePostSb } from "@/typings/storyblok";
+import type { ISbStoryData } from "storyblok";
 
-export interface Post {
-  name: string;
-  slug: string;
-  content: {
-    description: StoryblokRichTextNode;
-  };
-}
+export default function PostCard({
+  value,
+}: {
+  value: ISbStoryData<ResumePostSb> | string;
+}) {
+  if (typeof value === "string") return <div />;
 
-export default function PostCard({ value }: { value: Post }) {
   return (
     <div className="post">
       <Title tag="h3">

@@ -22,11 +22,3 @@ export interface Activity {
   average_heartrate: number;
   max_heartrate: number;
 }
-
-export interface StoryblokLink {
-  id: string;
-  url: string;
-  linktype: string;
-  fieldtype: string;
-  cached_url: string;
-}
