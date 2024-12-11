@@ -81,8 +81,6 @@ export async function getStaticProps() {
   const stravaActivities = await fetchExtendedActivities();
   const indexPage = await fetchIndexPage();
 
-  console.log("_stravaActivities_", stravaActivities);
-
   return {
     props: {
       meta: {
