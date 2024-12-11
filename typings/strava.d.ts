@@ -21,4 +21,5 @@ export interface Activity {
   has_heartrate: boolean;
   average_heartrate: number;
   max_heartrate: number;
+  calories: number;
 }

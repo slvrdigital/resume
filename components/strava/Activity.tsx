@@ -1,9 +1,8 @@
 import { formatDistanceToNow, parseISO, format } from "date-fns";
 import Title from "@/components/Title";
 import Content from "@/components/Content";
-import Time from "./Time";
-import Heartrate from "./Heartrate";
 import { Activity as ActivityType } from "@/typings/strava";
+import Stats from "./Stats";
 
 function formatDate(dateString: string): string {
   const date = parseISO(dateString);
@@ -35,14 +34,12 @@ export default function Activity({ value }: { value: ActivityType }) {
             {value.name}
           </a>
         </Title>
-        <div className="text-sm mb-4 color-100">
-          <span>{value.sport_type}</span>
+
+        <div className="mb-4">
+          <Stats value={value} />
         </div>
+
         {value.description && <Content html={value.description} />}
-        <div className="flex flex-wrap gap-x-1.5 gap-y-0.5">
-          {value.moving_time && <Time value={value.moving_time}></Time>}
-          {value.has_heartrate && <Heartrate value={value.average_heartrate} />}
-        </div>
       </div>
     </div>
   );
