@@ -7,7 +7,10 @@ interface Props {
 }
 
 const Flame = forwardRef(
-  ({ color = "currentColor", size = 24, ...rest }: Props, ref) => {
+  (
+    { color = "currentColor", size = 24, ...rest }: Props,
+    ref: React.ForwardedRef<SVGSVGElement | null>
+  ) => {
     return (
       <svg
         ref={ref}
