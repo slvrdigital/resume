@@ -1,29 +1,31 @@
-import { PageConfig } from "next";
-import meta from "@/public/data/meta.json";
-import projects from "@/public/data/projects.json";
-import Section from "@/components/Section";
-import List from "@/components/List";
-import ListItem from "@/components/ListItem";
-import Strava from "@/components/strava/Strava";
-import type { Activity } from "@/typings/strava";
-import JobCard from "@/storyblok/JobCard";
-import RefCard from "@/storyblok/RefCard";
-import PostCard from "@/storyblok/PostCard";
-import ProjectCard, { type Project } from "@/storyblok/ProjectCard";
-import RichText from "@/storyblok/RichText";
-import { fetchExtendedActivities } from "@/service/stravaApi";
-import { fetchIndexPage } from "@/service/storyblokApi";
+import { PageConfig } from 'next'
+import meta from '@/public/data/meta.json'
+import projects from '@/public/data/projects.json'
+import Section from '@/components/Section'
+import List from '@/components/List'
+import ListItem from '@/components/ListItem'
+import Strava from '@/components/strava/Strava'
+import type { Activity } from '@/typings/strava'
+import JobCard from '@/storyblok/JobCard'
+import RefCard from '@/storyblok/RefCard'
+import ProjectCard, { type Project } from '@/storyblok/ProjectCard'
+import RichText from '@/storyblok/RichText'
+import ArticleCard from '@/devto/ArticleCard'
+import { fetchExtendedActivities } from '@/service/stravaApi'
+import { fetchIndexPage } from '@/service/storyblokApi'
+import { fetchArticles } from '@/service/devToApi'
 
 export const config: PageConfig = {
   unstable_runtimeJS: false,
-};
-
-interface PageProps {
-  page: Awaited<ReturnType<typeof fetchIndexPage>>;
-  activities: Activity[];
 }
 
-export default function Index({ page, activities }: PageProps) {
+interface PageProps {
+  page: Awaited<ReturnType<typeof fetchIndexPage>>
+  posts: Awaited<ReturnType<typeof fetchArticles>>
+  activities: Activity[]
+}
+
+export default function Index({ page, posts, activities }: PageProps) {
   return (
     <>
       <Section title="About">
@@ -50,11 +52,11 @@ export default function Index({ page, activities }: PageProps) {
         </List>
       </Section>
 
-      <Section title="Log" href="/log">
+      <Section title="Posts" href="/posts">
         <List>
-          {page.posts?.map((post, index: number) => (
+          {posts?.map((post, index: number) => (
             <ListItem key={index}>
-              <PostCard value={post} />
+              <ArticleCard value={post} />
             </ListItem>
           ))}
         </List>
@@ -74,21 +76,23 @@ export default function Index({ page, activities }: PageProps) {
         <Strava activities={activities} />
       </Section>
     </>
-  );
+  )
 }
 
 export async function getStaticProps() {
-  const stravaActivities = await fetchExtendedActivities();
-  const indexPage = await fetchIndexPage();
+  const stravaActivities = await fetchExtendedActivities()
+  const indexPage = await fetchIndexPage()
+  const posts = await fetchArticles()
 
   return {
     props: {
       meta: {
-        title: "Index",
+        title: 'Index',
         description: meta.site_description,
       },
       activities: stravaActivities,
       page: indexPage,
+      posts,
     },
-  };
+  }
 }
