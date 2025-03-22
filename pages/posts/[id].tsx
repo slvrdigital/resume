@@ -12,7 +12,7 @@ export default function Post({
 }: {
   post: Awaited<ReturnType<typeof fetchArticle>>
 }) {
-  return <Content html={post.body_html} />
+  return <>{post && <Content html={post.body_html} />}</>
 }
 
 export async function getStaticProps({ params }: { params: { id: number } }) {
@@ -31,7 +31,7 @@ export async function getStaticProps({ params }: { params: { id: number } }) {
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   const posts = await fetchArticles(100) // not all but 100
-  const paths = posts.map((post: { id: number }) => `/posts/${post.id}`) || []
+  const paths = posts.map((post) => `/posts/${post.id}`) || []
 
   return {
     paths,
