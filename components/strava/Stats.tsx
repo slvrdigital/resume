@@ -1,19 +1,19 @@
-import { Activity as IActivity } from "@/typings/strava";
-import { Activity, BarChart2 } from "react-feather";
-import FlameIcon from "@/components/icons/Flame";
-import TimerIcon from "@/components/icons/Timer";
+import { Activity as IActivity } from '@/typings/strava'
+import { Activity, BarChart2 } from 'react-feather'
+import FlameIcon from '@/components/icons/Flame'
+import TimerIcon from '@/components/icons/Timer'
 
 function formatTime(seconds: number): string {
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-  const remainingSeconds = seconds % 60;
+  const hours = Math.floor(seconds / 3600)
+  const minutes = Math.floor((seconds % 3600) / 60)
+  const remainingSeconds = seconds % 60
 
   // pad with leading zeros if needed
-  const formattedHours = hours > 0 ? String(hours).padStart(2, "0") + ":" : "";
-  const formattedMinutes = String(minutes).padStart(2, "0");
-  const formattedSeconds = String(remainingSeconds).padStart(2, "0");
+  const formattedHours = hours > 0 ? String(hours).padStart(2, '0') + ':' : ''
+  const formattedMinutes = String(minutes).padStart(2, '0')
+  const formattedSeconds = String(remainingSeconds).padStart(2, '0')
 
-  return `${formattedHours}${formattedMinutes}:${formattedSeconds}`;
+  return `${formattedHours}${formattedMinutes}:${formattedSeconds}`
 }
 
 export default function Stats({ value }: { value: IActivity }) {
@@ -33,7 +33,7 @@ export default function Stats({ value }: { value: IActivity }) {
         </li>
       )}
 
-      {value.calories && (
+      {value.calories > 0 && (
         <li title="Calories" className="flex items-center gap-0.5">
           <FlameIcon className="w-3.5 h-3.5" />
           <span>{value.calories} cal.</span>
@@ -47,5 +47,5 @@ export default function Stats({ value }: { value: IActivity }) {
         </li>
       )}
     </ul>
-  );
+  )
 }
