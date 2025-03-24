@@ -1,6 +1,7 @@
 import { GetStaticPaths, PageConfig } from 'next'
 import meta from '@/public/data/meta.json'
 import Content from '@/components/Content'
+import Title from '@/components/Title'
 import { fetchArticle, fetchArticles } from '@/service/devToApi'
 
 export const config: PageConfig = {
@@ -12,11 +13,18 @@ export default function Post({
 }: {
   post: Awaited<ReturnType<typeof fetchArticle>>
 }) {
-  return <>{post && <Content html={post.body_html} />}</>
+  return (
+    post && (
+      <article>
+        <Title tag="h1">{post.title}</Title>
+        <Content html={post.body_html} />
+      </article>
+    )
+  )
 }
 
-export async function getStaticProps({ params }: { params: { id: number } }) {
-  const post = await fetchArticle(params.id)
+export async function getStaticProps({ params }: { params: { slug: string } }) {
+  const post = await fetchArticle(params.slug)
 
   return {
     props: {
@@ -31,7 +39,7 @@ export async function getStaticProps({ params }: { params: { id: number } }) {
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   const posts = await fetchArticles(100) // not all but 100
-  const paths = posts.map((post) => `/posts/${post.id}`) || []
+  const paths = posts.map((post) => `/posts/${post.slug}`) || []
 
   return {
     paths,

@@ -16,6 +16,9 @@ const USERNAME = 'kshevitsky'
 
 export const client = axios.create({
   baseURL: 'https://dev.to/api',
+  headers: {
+    'api-key': process.env.DEV_TO_API_KEY,
+  },
 })
 
 export async function fetchArticles(perPage: number = 3): Promise<Article[]> {
@@ -34,9 +37,9 @@ export async function fetchArticles(perPage: number = 3): Promise<Article[]> {
   }
 }
 
-export async function fetchArticle(id: number): Promise<Article> {
+export async function fetchArticle(slug: string): Promise<Article> {
   try {
-    const response = await client.get(`/articles/${id}`)
+    const response = await client.get(`/articles/${USERNAME}/${slug}`)
 
     return response.data
   } catch (error) {
