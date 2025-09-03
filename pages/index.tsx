@@ -11,6 +11,7 @@ import RefCard from '@/storyblok/RefCard'
 import ProjectCard, { type Project } from '@/storyblok/ProjectCard'
 import RichText from '@/storyblok/RichText'
 import ArticleCard from '@/devto/ArticleCard'
+import GoatCounterPixel from '@/components/GoatCounterPixel'
 import { fetchExtendedActivities } from '@/service/stravaApi'
 import { fetchIndexPage } from '@/service/storyblokApi'
 import { fetchArticles } from '@/service/devToApi'
@@ -75,6 +76,8 @@ export default function Index({ page, posts, activities }: PageProps) {
       <Section title="Recent Activities" href={meta.strava_profile}>
         <Strava activities={activities} />
       </Section>
+
+      <GoatCounterPixel path='/' />
     </>
   )
 }

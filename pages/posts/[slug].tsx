@@ -2,6 +2,7 @@ import { GetStaticPaths, PageConfig } from 'next'
 import meta from '@/public/data/meta.json'
 import Content from '@/components/Content'
 import Title from '@/components/Title'
+import GoatCounterPixel from '@/components/GoatCounterPixel'
 import { fetchArticle, fetchArticles } from '@/service/devToApi'
 
 export const config: PageConfig = {
@@ -18,6 +19,7 @@ export default function Post({
       <article>
         <Title tag="h1">{post.title}</Title>
         <Content html={post.body_html} />
+        <GoatCounterPixel path={`/posts/${post.slug}`} />
       </article>
     )
   )

@@ -4,6 +4,7 @@ import Section from '@/components/Section'
 import List from '@/components/List'
 import ListItem from '@/components/ListItem'
 import ArticleCard from '@/devto/ArticleCard'
+import GoatCounterPixel from '@/components/GoatCounterPixel'
 import { fetchArticles } from '@/service/devToApi'
 
 export const config: PageConfig = {
@@ -26,6 +27,8 @@ export default function PostsIndex({
           ))}
         </List>
       </Section>
+
+      <GoatCounterPixel path='/posts' />
     </>
   )
 }
