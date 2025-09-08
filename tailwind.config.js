@@ -21,7 +21,16 @@ module.exports = {
       ],
       serif: ["Blanco-Web", "Times", "serif"],
     },
-    extend: {},
+    extend: {
+      colors: {
+        base: "rgb(var(--base) / <alpha-value>)",
+        brand: {
+          100: "rgb(var(--brand-100) / <alpha-value>)",
+          200: "rgb(var(--brand-200) / <alpha-value>)",
+          300: "rgb(var(--brand-300) / <alpha-value>)",
+        },
+      }
+    },
   },
   plugins: [],
 };
