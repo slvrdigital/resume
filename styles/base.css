@@ -64,12 +64,6 @@ strong {
   color: rgb(var(--brand-300));
 }
 
-.header,
-.main,
-.footer {
-  @apply w-full max-w-2xl px-6 mx-auto;
-}
-
 .content p:not(:last-child) {
   @apply mb-2;
 }
