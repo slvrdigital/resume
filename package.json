@@ -10,6 +10,7 @@
     "storyblok:types": "bash .script/storyblok.sh"
   },
   "dependencies": {
+    "@octokit/graphql": "^9.0.1",
     "@storyblok/react": "^4.0.0",
     "@storyblok/richtext": "^3.0.2",
     "@types/node": "20.4.2",
