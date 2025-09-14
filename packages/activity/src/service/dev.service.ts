@@ -2,7 +2,6 @@ import axios from 'axios'
 
 import type { DevArticleResource } from '../schemas/DevArticleSchema'
 
-const USERNAME = process.env.DEV_TO_USERNAME!
 
 const client = axios.create({
   baseURL: 'https://dev.to/api',
@@ -12,6 +11,8 @@ const client = axios.create({
 })
 
 export async function listDevArticles(perPage: number = 3): Promise<DevArticleResource[]> {
+  const USERNAME = process.env.DEV_TO_USERNAME!
+
   try {
     const response = await client.get(`/articles`, {
       params: {
@@ -28,6 +29,8 @@ export async function listDevArticles(perPage: number = 3): Promise<DevArticleRe
 }
 
 export async function getDevArticle(slug: string): Promise<DevArticleResource> {
+  const USERNAME = process.env.DEV_TO_USERNAME!
+
   try {
     const response = await client.get(`/articles/${USERNAME}/${slug}`)
 
