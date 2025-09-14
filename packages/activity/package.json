@@ -1,0 +1,10 @@
+{
+  "name": "@resume/activity",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "@octokit/graphql": "^9.0.1",
+    "@resume/activity": "workspace:*"
+  }
+}

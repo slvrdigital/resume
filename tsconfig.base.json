@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "Node",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": [
+        "./*"
+      ],
+      "@/*": [
+        "./packages/site/*"
+      ],
+      "@resume/activity": [
+        "packages/activity/src/index.ts"
+      ],
+      "@resume/activity/*": [
+        "packages/activity/src/*"
+      ],
+      "@resume/utils": [
+        "packages/utils/src/index.ts"
+      ],
+      "@resume/utils/*": [
+        "packages/utils/src/*"
+      ]
+    },
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "env.ts"
+  ]
+}

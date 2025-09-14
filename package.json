@@ -1,35 +1,21 @@
 {
-  "name": "eugeen",
-  "version": "0.1.0",
+  "name": "@resume/source",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "storyblok:types": "bash .script/storyblok.sh"
+    "site:dev": "pnpm --filter site dev",
+    "site:build": "pnpm --filter site build",
+    "site:start": "pnpm --filter site start",
+    "site:sitemap": "pnpm --filter site sitemap"
   },
   "dependencies": {
-    "@storyblok/react": "^4.0.0",
-    "@storyblok/richtext": "^3.0.2",
-    "@types/node": "20.4.2",
-    "@types/react": "18.2.15",
-    "@types/react-dom": "18.2.7",
-    "autoprefixer": "10.4.14",
     "axios": "^1.7.9",
     "date-fns": "^4.1.0",
-    "eslint": "8.45.0",
-    "eslint-config-next": "13.4.10",
-    "next": "^13.5.4",
-    "next-sitemap": "^4.2.3",
-    "postcss": "8.4.26",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-feather": "^2.0.10",
-    "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+    "zod": "^4.1.5"
   },
   "devDependencies": {
-    "storyblok": "^3.35.1"
+    "@types/node": "24.3.1",
+    "dotenv": "^17.2.2",
+    "typescript": "5.9.2"
   }
 }
