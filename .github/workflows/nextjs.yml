@@ -20,22 +20,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: 'pnpm'
 
-      - name: Setup pnpm
+      - name: Setup pnpm and install dependencies
         uses: pnpm/action-setup@v4
         with:
-          version: 9 # match your project's version
+          version: 9
           run_install: true
 
-      - name: Setup Pages
+      - name: Configure Pages for Next.js
         uses: actions/configure-pages@v4
         with:
           static_site_generator: next
@@ -48,7 +48,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}-
 
-      - name: Build with Next.js
+      - name: Build Next.js site
         run: pnpm --filter site next build --turbopack
         env:
           STORYBLOK_API_KEY: ${{ secrets.STORYBLOK_API_KEY }}
@@ -63,7 +63,7 @@ jobs:
         env:
           BASE_PATH: ${{ secrets.BASE_PATH }}
 
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
