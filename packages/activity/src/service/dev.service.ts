@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import type { DevArticleResource } from '../schemas/DevArticleSchema'
 
-const USERNAME = process.env.DEV_TO_USERNAME! ?? 'kshevitsky'
+const USERNAME = process.env.DEV_TO_USERNAME!
 
 const client = axios.create({
   baseURL: 'https://dev.to/api',

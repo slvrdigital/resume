@@ -41,6 +41,10 @@ jobs:
       - name: Build
         run: pnpm site:build
         env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_USERNAME: ${{ secrets.GH_USERNAME }}
+          DEV_TO_API_KEY: ${{ secrets.DEV_TO_API_KEY }}
+          DEV_TO_USERNAME: ${{ secrets.DEV_TO_USERNAME }}
           STORYBLOK_API_KEY: ${{ secrets.STORYBLOK_API_KEY }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
