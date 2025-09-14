@@ -39,7 +39,7 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm --filter site next build --turbopack
+        run: pnpm --filter site:build
         env:
           STORYBLOK_API_KEY: ${{ secrets.STORYBLOK_API_KEY }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
@@ -49,7 +49,7 @@ jobs:
           BASE_PATH: ${{ secrets.BASE_PATH }}
 
       - name: Generate sitemaps
-        run: pnpm --filter site next-sitemap
+        run: pnpm --filter site:sitemap
         env:
           BASE_PATH: ${{ secrets.BASE_PATH }}
 
