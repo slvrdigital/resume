@@ -38,7 +38,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build website
+      - name: Build
         run: pnpm --filter site next build --turbopack
         env:
           STORYBLOK_API_KEY: ${{ secrets.STORYBLOK_API_KEY }}
@@ -52,6 +52,11 @@ jobs:
         run: pnpm --filter site next-sitemap
         env:
           BASE_PATH: ${{ secrets.BASE_PATH }}
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
 
   deploy:
     environment:
