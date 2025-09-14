@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { ActivityResourceSchema, ActivitSourceEnum } from '../schemas/ActivitySchema'
-import { ENV } from '~/env'
 
 import type { StravaActivityResource } from '../schemas/StravaActivitySchema'
 
@@ -17,9 +16,9 @@ interface StravaAuthResponse {
 }
 
 async function getStravaAccessToken(): Promise<string> {
-  const STRAVA_CLIENT_ID = ENV.STRAVA_CLIENT_ID!;
-  const STRAVA_CLIENT_SECRET = ENV.STRAVA_CLIENT_SECRET!;
-  const STRAVA_REFRESH_TOKEN = ENV.STRAVA_REFRESH_TOKEN!;
+  const STRAVA_CLIENT_ID = process.env.STRAVA_CLIENT_ID!;
+  const STRAVA_CLIENT_SECRET = process.env.STRAVA_CLIENT_SECRET!;
+  const STRAVA_REFRESH_TOKEN = process.env.STRAVA_REFRESH_TOKEN!;
 
   if (!STRAVA_CLIENT_ID || !STRAVA_CLIENT_SECRET || !STRAVA_REFRESH_TOKEN) {
     throw new Error(

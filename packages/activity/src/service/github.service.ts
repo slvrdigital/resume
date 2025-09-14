@@ -2,14 +2,13 @@ import { parseISO } from 'date-fns'
 import { graphql, type GraphQlQueryResponseData } from '@octokit/graphql'
 import { WeeksCollectionResourceSchema } from '../schemas/github/WeeksCollectionSchema'
 import { ActivityResourceSchema, ActivitSourceEnum, type ActivityResource } from '../schemas/ActivitySchema'
-import { ENV } from '~/env'
 
-const GITHUB_USERNAME = ENV.GITHUB_USERNAME!
+const GITHUB_USERNAME = process.env.GITHUB_USERNAME!
 
 export async function listGithubContributions(username: string = GITHUB_USERNAME) {
   const client = graphql.defaults({
     headers: {
-      authorization: `token ${ENV.GITHUB_TOKEN}`
+      authorization: `token ${process.env.GITHUB_TOKEN}`
     },
   })
 
@@ -45,7 +44,7 @@ export async function listGithubContributionsAsActions(): Promise<ActivityResour
           date: parseISO(day.date).toISOString(),
           source: ActivitSourceEnum.enum.github,
           title: `Contributed ${day.contributionCount} update${day.contributionCount > 1 ? 's' : ''} across repositories`,
-          url: `https://github.com/${ENV.GITHUB_USERNAME}?tab=overview&from=${day.date}&to=${day.date}`,
+          url: `https://github.com/${process.env.GITHUB_USERNAME}?tab=overview&from=${day.date}&to=${day.date}`,
         })
 
         dayAcc.push(activity)
