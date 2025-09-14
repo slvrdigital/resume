@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --base: 248 249 250;
+  --brand-100: 173 181 189;
+  --brand-200: 108 117 125;
+  --brand-300: 73 80 87;
+  --github-primary: 36 41 46;
+  --strava-primary: 252 76 2;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --base: 33 37 41;
+    --brand-100: 108 117 125;
+    --brand-200: 173 181 189;
+    --brand-300: 233 236 239;
+  }
+}
+
+@layer base {
+  @font-face {
+    font-family: "Blanco-Web";
+    font-display: swap;
+    src: url("../public/fonts/Blanco-Regular.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Blanco-Web";
+    font-style: italic;
+    font-display: swap;
+    src: url("../public/fonts/Blanco-Italic.woff2") format("woff2");
+  }
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+html {
+  @apply font-sans font-normal text-base leading-normal;
+  font-size: clamp(1em, 2.5vw, 1.5em);
+  color: rgb(var(--brand-200));
+}
+
+body {
+  @apply min-h-screen py-16;
+  background-color: rgb(var(--base));
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: rgb(var(--brand-300));
+}
+
+b,
+strong {
+  font-weight: normal;
+  color: rgb(var(--brand-300));
+}
+
+.content p:not(:last-child) {
+  @apply mb-2;
+}
+
+.content ul,
+.content ol {
+  @apply pl-6 mb-2;
+}
+
+.content ul {
+  list-style-type: disc;
+}
+
+.content ol {
+  list-style-type: decimal;
+}
+
+.content code {
+  @apply text-xs px-1 py-0.5 rounded font-bold;
+  background-color: rgba(var(--brand-100), 0.1);
+  color: rgb(var(--brand-300));
+}
+
+@media (prefers-color-scheme: dark) {
+  .content code {
+    background-color: rgba(var(--brand-300), 0.1);
+    color: rgb(var(--brand-300));
+  }
+}
+
+.link,
+.content a {
+  @apply border-b border-dotted;
+  border-color: rgba(var(--brand-100), 0.75);
+}
+
+.link:hover,
+.content a:hover {
+  color: rgb(var(--brand-300));
+  border-color: rgba(var(--brand-100), 1);
+}
