@@ -1,7 +1,7 @@
 import { parseISO } from 'date-fns'
 import { formatDate } from '@resume/utils/date'
 import { listGithubContributionsAsActions } from './github.service'
-import { listStravaActivitiesAsActions } from './strava.service'
+// import { listStravaActivitiesAsActions } from './strava.service'
 import type { ActivityResource } from '../schemas/ActivitySchema'
 
 export function groupActivities(
@@ -37,7 +37,7 @@ export function groupActivities(
 
 export const listActivities = async (limit = 5) => {
   const data = await Promise.all([
-    listStravaActivitiesAsActions(),
+    // listStravaActivitiesAsActions(),
     listGithubContributionsAsActions(),
   ])
 

@@ -1,3 +1,22 @@
+/**
+ * Strava service for fetching activities.
+ * Ref.: https://developers.strava.com/docs/authentication/
+ * IMPORTANT: Access to Strava API is now available only under paid subscriptions.
+ * 
+ * 1. Obtain code with
+ * https://www.strava.com/oauth/authorize?client_id=141804&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&response_type=code&approval_prompt=auto&scope=activity%3Aread
+ * 
+ * 2. Redirect URL with code
+ * http://localhost:3000/callback?state=&code=YOUR_AUTHORIZATION_CODE&scope=read,activity:read
+ * 
+ * 3. Use `code` from the URL above to exchange for an access token.
+ * curl -X POST https://www.strava.com/api/v3/oauth/token \
+ *   -d client_id=<YOUR_CLIENT_ID> \
+ *   -d client_secret=<YOUR_CLIENT_SECRET> \
+ *   -d code=<YOUR_AUTHORIZATION_CODE> \
+ *   -d grant_type=authorization_code
+ */
+
 import axios from 'axios'
 import { ActivityResourceSchema, ActivitSourceEnum } from '../schemas/ActivitySchema'
 
